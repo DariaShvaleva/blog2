@@ -8,7 +8,7 @@ export default class Posts extends React.Component {
 	}
 
 	componentDidMount(){
-		axios.get('https://still-dawn-69995.herokuapp.com/api/posts')
+		axios.get('https://enigmatic-savannah-53961.herokuapp.com')
 		.then(res => {
 			const posts = res.data;
 			this.setState({ posts });
