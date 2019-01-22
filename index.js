@@ -1,16 +1,19 @@
 const express = require("express");
 const cors = require("cors");
+const path = require('path');
 const bodyParser = require("body-parser");
 const mongodb = require("mongodb");
 
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'build')));
+
 app 
-	.use(bodyParser.json())
-	.use(cors()).get("/api/test", function (req, res){
-		res.send('hello');
-	});
+  .use(bodyParser.json())
+  .use(cors()).get("/api/test", function (req, res){
+    res.send('hello');
+  });
 
 var db;
 mongodb.MongoClient.connect(process.env.MONGODB_URI, function (err, client) {
@@ -29,9 +32,7 @@ function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
   res.status(code || 500).json({ "error": message });
 }
-app.get("/", function (req, res) {
-  res.sendFile('/build/index.html');
-});
+
 app.get("/api/posts", function (req, res) {
   db.collection("posts").find({}).sort({_id:-1}).toArray(function (err, docs) {
     if (err) {
@@ -75,4 +76,6 @@ app.delete("/api/posts/:id", function(req, res) {
   });
 });
 
-app.use(express.static("/build/"))
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname + "build/index.html"));
+});
