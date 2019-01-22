@@ -20,7 +20,7 @@ constructor(props) {
 
 	
 	handleSubmit(event) {
-		axios.post('https://still-dawn-69995.herokuapp.com/api/posts', {
+		axios.post('https://enigmatic-savannah-53961.herokuapp.com/api/posts', {
 			title: this.state.title, content: this.state.content, tags: this.state.tags
 		}).then(res => window.location.reload());
 		
