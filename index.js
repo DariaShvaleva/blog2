@@ -29,6 +29,9 @@ function handleError(res, reason, message, code) {
   console.log("ERROR: " + reason);
   res.status(code || 500).json({ "error": message });
 }
+app.get("/", function (req, res) {
+  res.sendFile('/build/index.html');
+});
 app.get("/api/posts", function (req, res) {
   db.collection("posts").find({}).sort({_id:-1}).toArray(function (err, docs) {
     if (err) {
