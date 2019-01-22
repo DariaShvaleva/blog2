@@ -3,7 +3,8 @@
     "start": "node index.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js index.js",
     "client": "react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "postinstall": "react-scripts build"
   },
   "name": "blog",
   "version": "1.0.0",

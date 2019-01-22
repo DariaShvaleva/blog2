@@ -71,3 +71,5 @@ app.delete("/api/posts/:id", function(req, res) {
     }
   });
 });
+
+app.use(express.static("/build/"))
